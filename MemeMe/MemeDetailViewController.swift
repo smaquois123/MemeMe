@@ -8,6 +8,6 @@
 
 import UIKit
 
-class MemeDetailViewController {
+class MemeDetailViewController: UIViewController {
     
 }

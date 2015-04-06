@@ -8,6 +8,6 @@
 
 import UIKit
 
-class SentMemesCollectionViewController {
+class SentMemesCollectionViewController: UIViewController {
     
 }

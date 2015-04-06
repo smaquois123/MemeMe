@@ -36,8 +36,17 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
-    @IBAction func saveOrSendAction(sender: AnyObject) {
-        println(sender.description)
+    @IBAction func shareButtonClicked(sender: UIBarButtonItem)
+    {
+        let textToShare = "Swift is awesome!  Check out this website about it!"
+        
+        if let myWebsite = NSURL(string: "http://www.codingexplorer.com/")
+        {
+            let objectsToShare = [textToShare, myWebsite]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            
+            self.presentViewController(activityVC, animated: true, completion: nil)
+        }
     }
     
     /* we started ok, so set up the font attrs for the meme, and various textfield attrs */
@@ -78,6 +87,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.unsubscribeFromKeyboardNotifications()
+    }
+    
+    /* hide the status bar for this viewcontroller */
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
     // MARK: - controllers section
@@ -153,7 +167,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // Add it to the memes array in the Application Delegate
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as AppDelegate
-        appDelegate.memes.append(meme)
+        //appDelegate.memes.append(meme)
     }
     
     func generateMemedImage() -> UIImage

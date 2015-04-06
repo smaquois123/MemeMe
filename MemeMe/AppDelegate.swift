@@ -14,9 +14,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     //used to hold sent memes for storage.
-    var memes = [Meme]()
+    var memes = [Int]()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        //memes.append(16)
+        
+        /* if there are any sent memes, we want to start with the SentMemesTableViewController.  if not, go to the MemeEditorViewController */
+        
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if (memes.count > 0){
+            var sentMemesTableViewController: SentMemesTableViewController = mainStoryboard.instantiateViewControllerWithIdentifier("SentMemesTableViewController") as SentMemesTableViewController
+            self.window?.rootViewController = sentMemesTableViewController
+        }else{
+            var memeEditorViewController: MemeEditorViewController = mainStoryboard.instantiateViewControllerWithIdentifier("MemeEditorViewController") as MemeEditorViewController
+            self.window?.rootViewController = memeEditorViewController
+        }
+        self.window?.makeKeyAndVisible()
         return true
     }
 
