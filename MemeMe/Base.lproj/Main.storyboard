@@ -9,7 +9,7 @@
         <!--MemeDetailViewController-->
         <scene sceneID="hv9-nT-PbY">
             <objects>
-                <viewController title="MemeDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HUf-Uu-a3f" customClass="MemeDetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemeDetailViewController" title="MemeDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HUf-Uu-a3f" customClass="MemeDetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pHX-uh-vsm"/>
                         <viewControllerLayoutGuide type="bottom" id="KhC-LD-dPn"/>
@@ -35,7 +35,28 @@
                     <view key="view" contentMode="scaleToFill" id="Oew-le-Yff">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SentMemesCollectionViewController" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uzm-6W-NWG">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="60" y="289" width="280" height="21"/>
+                                </variation>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Uzm-6W-NWG"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Uzm-6W-NWG"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="hJ0-lS-4oL"/>
                 </viewController>
@@ -98,10 +119,10 @@
             </objects>
             <point key="canvasLocation" x="462" y="425"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--TabBarController-->
         <scene sceneID="NjY-3Z-Pmx">
             <objects>
-                <tabBarController id="cSD-iX-Ngt" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" title="TabBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cSD-iX-Ngt" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="dWB-Ud-8Qb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -154,15 +175,9 @@
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="38" y="501" width="324" height="30"/>
-                                </variation>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0TF-1v-pnl">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0TF-1v-pnl">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="38" y="166" width="324" height="259"/>
-                                </variation>
                             </imageView>
                             <navigationBar contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="utj-bk-CPl">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -207,23 +222,23 @@
                                 <exclude reference="utj-bk-CPl"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="FlA-fr-M98"/>
-                                <exclude reference="ne3-wa-D2p"/>
-                                <exclude reference="uDb-a8-gi2"/>
+                                <exclude reference="B5a-WX-LYF"/>
+                                <exclude reference="ICO-Po-Cuw"/>
+                                <exclude reference="XQZ-pH-Hvp"/>
+                                <exclude reference="Yyo-eE-FwB"/>
                                 <exclude reference="FZZ-I7-nEN"/>
                                 <exclude reference="bdy-3c-xgX"/>
                                 <exclude reference="c3h-fy-E6c"/>
                                 <exclude reference="kYC-d1-Tcr"/>
-                                <exclude reference="UXY-fH-cdH"/>
-                                <exclude reference="acD-Ce-G1S"/>
-                                <exclude reference="wUv-S6-BY4"/>
-                                <exclude reference="ICO-Po-Cuw"/>
-                                <exclude reference="XQZ-pH-Hvp"/>
-                                <exclude reference="Yyo-eE-FwB"/>
                                 <exclude reference="Q6u-5v-cUJ"/>
                                 <exclude reference="aHL-Oe-H1t"/>
                                 <exclude reference="u7z-7j-PZW"/>
-                                <exclude reference="B5a-WX-LYF"/>
+                                <exclude reference="FlA-fr-M98"/>
+                                <exclude reference="ne3-wa-D2p"/>
+                                <exclude reference="uDb-a8-gi2"/>
+                                <exclude reference="UXY-fH-cdH"/>
+                                <exclude reference="acD-Ce-G1S"/>
+                                <exclude reference="wUv-S6-BY4"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -235,23 +250,23 @@
                                 <include reference="utj-bk-CPl"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="FlA-fr-M98"/>
-                                <include reference="ne3-wa-D2p"/>
-                                <include reference="uDb-a8-gi2"/>
+                                <include reference="B5a-WX-LYF"/>
+                                <include reference="ICO-Po-Cuw"/>
+                                <include reference="XQZ-pH-Hvp"/>
+                                <include reference="Yyo-eE-FwB"/>
                                 <include reference="FZZ-I7-nEN"/>
                                 <include reference="bdy-3c-xgX"/>
                                 <include reference="c3h-fy-E6c"/>
                                 <include reference="kYC-d1-Tcr"/>
-                                <include reference="UXY-fH-cdH"/>
-                                <include reference="acD-Ce-G1S"/>
-                                <include reference="wUv-S6-BY4"/>
-                                <include reference="ICO-Po-Cuw"/>
-                                <include reference="XQZ-pH-Hvp"/>
-                                <include reference="Yyo-eE-FwB"/>
                                 <include reference="Q6u-5v-cUJ"/>
                                 <include reference="aHL-Oe-H1t"/>
                                 <include reference="u7z-7j-PZW"/>
-                                <include reference="B5a-WX-LYF"/>
+                                <include reference="FlA-fr-M98"/>
+                                <include reference="ne3-wa-D2p"/>
+                                <include reference="uDb-a8-gi2"/>
+                                <include reference="UXY-fH-cdH"/>
+                                <include reference="acD-Ce-G1S"/>
+                                <include reference="wUv-S6-BY4"/>
                             </mask>
                         </variation>
                     </view>
@@ -259,6 +274,8 @@
                         <outlet property="bottomTextField" destination="gMD-Gl-UFM" id="JAq-Fz-0er"/>
                         <outlet property="cameraButton" destination="mu4-Qv-ng2" id="EvG-4F-4Of"/>
                         <outlet property="imagePickerView" destination="0TF-1v-pnl" id="Gi0-Eq-Xu1"/>
+                        <outlet property="navigationBar" destination="utj-bk-CPl" id="WFx-Ip-dIa"/>
+                        <outlet property="toolbar" destination="MsU-aG-4ng" id="lDS-RE-ADA"/>
                         <outlet property="topTextField" destination="kPT-UJ-ViI" id="3Vq-8p-x1w"/>
                     </connections>
                 </viewController>
