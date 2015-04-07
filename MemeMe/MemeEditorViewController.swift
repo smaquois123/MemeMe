@@ -18,6 +18,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var toolbar: UIToolbar!
+    
     // MARK: - IBAction section
     
     /* if the user wants an existing image, bring up the photo album */
@@ -36,15 +39,18 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
-    @IBAction func shareButtonClicked(sender: UIBarButtonItem)
-    {
-        let textToShare = "Swift is awesome!  Check out this website about it!"
+    @IBAction func shareButtonClicked(sender: UIBarButtonItem) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.setToolbarHidden(true, animated: false)
+
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as AppDelegate
+        self.save(appDelegate)
+        var aMeme = appDelegate.memes[appDelegate.memes.count - 1]
         
-        if let myWebsite = NSURL(string: "http://www.codingexplorer.com/")
-        {
-            let objectsToShare = [textToShare, myWebsite]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            
+        if ((appDelegate.memes.last ) != nil){
+            var someImage: UIImage = aMeme.memedImage
+            let activityVC = UIActivityViewController(activityItems: [someImage], applicationActivities: nil)
             self.presentViewController(activityVC, animated: true, completion: nil)
         }
     }
@@ -113,21 +119,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     /* when the keyboard is about to show, this method will be called, and we can adjust the y origin of the image appropriately. */
     func keyboardWillShow(notification: NSNotification){
-        if( bottomTextField.editing )
-        {
-            //let userInfo = notification.userInfo
-            //let keyboardSize = userInfo![ UIKeyboardFrameEndUserInfoKey ] as NSValue
-            //self.view.frame.origin.y -= keyboardSize.CGRectValue().height
+        if( bottomTextField.editing ){
             self.view.frame.origin.y -= getKeyboardHeight(notification)
         }
     }
     
     /* when the keyboard is about to hide, this method will be called, and we can adjust the y origin back. */
     func keyboardWillHide(notification: NSNotification){
-        if( bottomTextField.editing )
-        {
-            //let userInfo = notification.userInfo
-            //let keyboardSize = userInfo![ UIKeyboardFrameEndUserInfoKey ] as NSValue
+        if( bottomTextField.editing ){
             self.view.frame.origin.y += getKeyboardHeight(notification)
         }
     }
@@ -157,17 +156,21 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // MARK: - meme handling section
     
-    func save() {
+    func save(appDelegate: AppDelegate) {
         
-        // TODO: Hide toolbar and navbar    
+        //Hide toolbar and navbar - i think it makes more sense here
+        navigationBar.hidden = true
+        toolbar.hidden = true
         
         //Create the meme
         var meme = Meme(topMemeText: topTextField.text!, bottomMemeText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
         
         // Add it to the memes array in the Application Delegate
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as AppDelegate
-        //appDelegate.memes.append(meme)
+        appDelegate.memes.append(meme)
+        
+        //Unhide bars
+        navigationBar.hidden = false
+        toolbar.hidden = false
     }
     
     func generateMemedImage() -> UIImage
@@ -180,3 +183,4 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return memedImage
     }
 }
+

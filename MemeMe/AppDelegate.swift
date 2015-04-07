@@ -14,11 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     //used to hold sent memes for storage.
-    var memes = [Int]()
+    var memes = [Meme]()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        //memes.append(16)
-        
+                
         /* if there are any sent memes, we want to start with the SentMemesTableViewController.  if not, go to the MemeEditorViewController */
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
@@ -39,5 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {}
     func applicationWillEnterForeground(application: UIApplication) {}
     func applicationDidBecomeActive(application: UIApplication) {}
-    func applicationWillTerminate(application: UIApplication) {}
+    func applicationWillTerminate(application: UIApplication) {
+        //TODO: good place to write out the memes
+    }
 }
