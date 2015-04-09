@@ -24,10 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
         if (memes.count > 0){
-            var sentMemesTableViewController: SentMemesTableViewController = mainStoryboard.instantiateViewControllerWithIdentifier("SentMemesTableViewController") as SentMemesTableViewController
+            var sentMemesTableViewController: SentMemesTableViewController = mainStoryboard.instantiateViewControllerWithIdentifier("SentMemesTableViewController") as! SentMemesTableViewController
             self.window?.rootViewController = sentMemesTableViewController
         }else{
-            var memeEditorViewController: MemeEditorViewController = mainStoryboard.instantiateViewControllerWithIdentifier("MemeEditorViewController") as MemeEditorViewController
+            var memeEditorViewController: MemeEditorViewController = mainStoryboard.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
             self.window?.rootViewController = memeEditorViewController
         }
         self.window?.makeKeyAndVisible()

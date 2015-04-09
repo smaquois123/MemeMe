@@ -14,7 +14,7 @@ class SentMemesTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let object = UIApplication.sharedApplication().delegate as AppDelegate
+        let object = UIApplication.sharedApplication().delegate as! AppDelegate
         let appDelegate = object as AppDelegate
         memes = appDelegate.memes
     }

@@ -17,6 +17,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var toolbar: UIToolbar!
@@ -28,6 +30,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         imagePicker.delegate = self
+        shareButton.enabled = true
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
@@ -36,32 +39,45 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
         imagePicker.delegate = self
+        shareButton.enabled = true
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func shareButtonClicked(sender: UIBarButtonItem) {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.navigationController?.setToolbarHidden(true, animated: false)
+        //if(imagePickerView.image != nil){
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+            self.navigationController?.setToolbarHidden(true, animated: false)
 
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as AppDelegate
-        self.save(appDelegate)
-        var aMeme = appDelegate.memes[appDelegate.memes.count - 1]
+            let object = UIApplication.sharedApplication().delegate
+            let appDelegate = object as! AppDelegate
+            self.save(appDelegate)
+            var aMeme = appDelegate.memes[appDelegate.memes.count - 1]
         
-        if ((appDelegate.memes.last ) != nil){
-            var someImage: UIImage = aMeme.memedImage
-            let activityVC = UIActivityViewController(activityItems: [someImage], applicationActivities: nil)
-            self.presentViewController(activityVC, animated: true, completion: nil)
-        }
+            if ((appDelegate.memes.last ) != nil){
+                var someImage: UIImage = aMeme.memedImage
+                let activityVC = UIActivityViewController(activityItems: [someImage], applicationActivities: nil)
+                self.presentViewController(activityVC, animated: true, completion: nil)
+            }
+        //}
+    }
+    
+    @IBAction func showSentMemes(sender: AnyObject) {
+        let sentMemesVC = SentMemesTableViewController()
+        self.presentViewController(sentMemesVC, animated: true, completion: nil)
     }
     
     /* we started ok, so set up the font attrs for the meme, and various textfield attrs */
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /*
+         * the line: NSForegroundColorAttributeName : UIColor.blackColor(), doesn't appear to have any effect.
+         */
+        
         let memeTextAttributes = [
-            NSStrokeColorAttributeName : UIColor.blackColor(),
-            NSForegroundColorAttributeName : UIColor.whiteColor(),
-            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 35)!,
+            NSStrokeColorAttributeName : UIColor.whiteColor(),
+            NSForegroundColorAttributeName : UIColor.blackColor(),
+            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
             NSStrokeWidthAttributeName : NSNumber(float: 3.0)
         ]
         
@@ -78,6 +94,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         bottomTextField.clearsOnBeginEditing = true
         bottomTextField.borderStyle = UITextBorderStyle.None
         bottomTextField.delegate = self
+        
+        shareButton.enabled = false
     }
     
     // MARK: - overrides section
@@ -134,7 +152,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     /* in order to move the image so we can see it while we're typing, we've gotta know how tall the keyboard is */
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
         let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as NSValue
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.CGRectValue().height
     }
     
@@ -149,7 +167,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     /* hide the keyboard when the return key is pressed */
-    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true;
     }
